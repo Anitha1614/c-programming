@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int num, temp, remainder, digits=0;
+    int sum=0;
+    printf("Enter the number to check whether it is an amstrong or not: \n");
+    scanf("%d", &num);
+    
+    temp=num;
+    while(temp!=0){
+        temp= temp/10;
+        digits++;
+    }
+    
+    temp=num;
+    while(temp!=0){
+        remainder= temp%10;
+        sum= sum+ pow(remainder, digits);
+        temp= temp/10;
+    }
+    
+    if(sum==num){
+        printf("It is an amstrong number: %d \n", num);
+    } else{
+        printf("It ia not an amstrong number: %d \n", num);
+    }
+
+    return 0;
+}
