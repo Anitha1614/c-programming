@@ -21,3 +21,39 @@ int main(){
     a=a-5;
     printf("The number is %d", a);
 }
+
+// Multiplication
+
+#include<stdio.h>
+
+int a;
+int main(){
+    printf("Enter the number: \n");
+    scanf("%d", &a);
+    a=a*3;
+    printf("The number is %d", a);
+}
+
+// Division
+
+#include<stdio.h>
+
+int a;
+int main(){
+    printf("Enter the number: \n");
+    scanf("%d", &a);
+    a=a/6;
+    printf("The number is %d", a);
+}
+
+// Modulo
+
+#include<stdio.h>
+
+int a;
+int main(){
+    printf("Enter the number: \n");
+    scanf("%d", &a);
+    a=a%8;
+    printf("The number is %d", a);
+}
