@@ -120,3 +120,74 @@ int main() {
     num= (x*10) +2;
     printf("The number: %d", num);
 }
+
+
+// check odd or even without using if
+
+#include <stdio.h>
+
+int main() {
+    int n,x;
+    printf("Enter a three-digit number: ");
+    scanf("%d", &n);
+    x= n-5;
+    !(x%2)&& printf("The number: %d", x);
+}
+
+// Get a 3 digit number and print the number if ones digit and hundereds digit is odd
+
+#include <stdio.h>
+
+int main() {
+    int n,x,z, a, y;
+    printf("Enter a three-digit number: ");
+    scanf("%d", &n);
+    x= n-5;
+    printf("The number: %d\n", x);
+    y= n%10;
+    z= y%10;
+    a= n/100;
+    (y%2)&& printf("The number if ones digit is odd: %d\n", n);
+    (a%2)&& printf("The number if 100's digit is odd: %d\n", n);
+}
+
+// Get a 3 digit number and print the sum of the digit, the sum should be a single digit
+
+#include <stdio.h>
+
+int main() {
+    int n,x,z, a, y, sum, sum1, b, c;
+    printf("Enter a three-digit number: ");
+    scanf("%d", &n);
+    x= n%10;
+    y= n/10;
+    z= y%10;
+    a= y/10;
+    sum= x+z+a;
+    if(sum<10){
+        printf("The sum of the digits: %d", sum);
+    }
+    else{
+        b= sum%10;
+        c= sum/10;
+        sum1= b+c;
+        printf("The sum of the digits: %d", sum1);
+    }
+}
+
+// Get a 4 digit number and reverse the last two digit and print
+
+#include <stdio.h>
+
+int main() {
+    int n, x, z, y, a, rev;
+    printf("Enter a four-digit number: ");
+    scanf("%d", &n);
+    a= n%100;
+    x= n/100;
+    y= x%10;
+    z= x/10;
+    rev= y*1000 + z*100 + a;
+    //printf("The sum of the digits: %d,%d,%d,%d", x, y, z, a);
+    printf("The Number: %d", rev);
+}
