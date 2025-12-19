@@ -1,0 +1,23 @@
+// Addition
+
+#include<stdio.h>
+
+int a;
+int main(){
+    printf("Enter the number");
+    scanf("%d", &a);
+    a=a+2;
+    printf("The number is %d", a);
+}
+
+// Subtraction
+
+#include<stdio.h>
+
+int a;
+int main(){
+    printf("Enter the number: \n");
+    scanf("%d", &a);
+    a=a-5;
+    printf("The number is %d", a);
+}
