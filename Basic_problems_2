@@ -1,0 +1,196 @@
+// print the odd numbers
+
+#include <stdio.h>
+
+int main() {
+    int i=1;
+    loop: if(i<=9){
+        if (i%2==1){
+            printf("%d\n", i);
+        }
+         i=i+1;
+         goto loop;
+    }
+}
+
+// print the two digit odd number whos sum if 7
+
+#include <stdio.h>
+
+int main() {
+    int i=10;
+    loop: if(i<100){
+        if ((i%2==1)&& (i%10 + i/10==7)){
+            printf("%d\n", i);
+        }
+         i=i+1;
+         goto loop;
+    }
+}
+
+// print the two digit even number whos sum is 6
+
+#include <stdio.h>
+
+int main() {
+    int i=10;
+    loop: if(i<100){
+        if ((i%2==0)&& (i%10 + i/10==6)){
+            printf("%d\n", i);
+        }
+         i=i+1;
+         goto loop;
+    }
+}
+
+// print the sum of 2 digit number whose tens digit is 7
+
+#include <stdio.h>
+
+int main() {
+    int i=10, sum;
+    loop: if(i<100){
+        if ((i%2==1)&& (i/10==7)){
+            sum= (i/10 + i%10);
+            printf("%d\n", sum);
+        }
+         i=i+1;
+         goto loop;
+    }
+}
+
+// print the number of digits of the number
+
+#include <stdio.h>
+
+int main() {
+    int x, count=0;
+    printf("enter the number\n");
+    scanf("%d", &x);
+    loop: if(x>0){
+        x=x/10;
+        count=count+1;
+        goto loop;
+    }
+    printf("%d", count);
+}
+
+// print the number of digits of the number
+
+#include <stdio.h>
+
+int main() {
+    int x, digit, sum=0;
+    printf("enter the number\n");
+    scanf("%d", &x);
+    loop: if(x>0){
+        digit=x%10;
+        sum=sum+digit;
+        x=x/10;
+        goto loop;
+    }
+    printf("%d", sum);
+}
+
+// Reverse the number
+
+#include <stdio.h>
+
+int main() {
+    int x, digit, rev=0;
+    printf("enter the number\n");
+    scanf("%d", &x);
+    loop: if(x>0){
+        digit=x%10;
+        rev=rev*10 +digit;
+        x=x/10;
+        goto loop;
+    }
+    printf("%d", rev);
+}
+
+//reverse first and last digit of the number
+
+#include <stdio.h>
+
+int main() {
+    int n, temp, first, last, middle, result, div = 1;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    temp = n;
+    last = n % 10;
+
+find_first:
+    if (temp >= 10) {
+        temp = temp / 10;
+        div = div * 10;
+        goto find_first;
+    }
+
+    first = temp;
+    middle = (n % div) / 10;
+    result = last * div + middle * 10 + first;
+
+    printf("%d\n", result);
+}
+
+// print the number if the last digit is even else subtract 1 from the last digit and print the number
+
+#include <stdio.h>
+
+int main() {
+    int n, temp, first, div = 1, number;
+
+    printf("Enter the number:\n");
+    scanf("%d", &n);
+
+    temp = n;
+
+find_first:
+    if (temp >= 10) {
+        temp = temp / 10;
+        div = div * 10;
+        goto find_first;
+    }
+
+    first = temp;
+
+    if (first % 2 == 0) {
+        printf("The number is: %d\n", n);
+    } else {
+        first = first - 1;
+        number = first * div + (n % div);
+        printf("The number is: %d\n", number);
+    }
+
+}
+
+// Prime or not
+
+#include <stdio.h>
+
+int main() {
+    int n, i = 2;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    if (n <= 1) {
+        printf("Not a prime number");
+        return 0;
+    }
+
+check:
+    if (i <= n / 2) {
+        if (n % i == 0) {
+            printf("Not a prime number");
+            return 0;
+        }
+        i = i + 1;
+        goto check;
+    }
+
+    printf("Prime number");
+    return 0;
+}
+
