@@ -146,11 +146,11 @@ int main() {
 
     temp = n;
 
-find_first:
+find_last:
     if (temp >= 10) {
         temp = temp / 10;
         div = div * 10;
-        goto find_first;
+        goto find_last;
     }
 
     first = temp;
