@@ -308,5 +308,231 @@ int main() {
     printf("It is a prime number");
 }
 
+// print the number of single digit prime numbers
+
+#include <stdio.h>
+
+int j,i, count=0;
+int isPrime;
+
+int main() {
+    
+    
+    for (i = 2; i <= 10; i++) {
+        isPrime =1;
+        
+        for(j=2; j<i; j++){
+            if(i%j==0){
+                isPrime=0;
+                break;
+            }
+        }
+        
+        if(isPrime==1){
+            count=count+1;
+        }
+    }
+    
+    printf("%d", count);
+  
+}
+
+// get a number and print the number of odd digits in the number
+
+#include <stdio.h>
+
+int n, count=0, x;
+
+int main() {
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    
+    while (n>0){
+        x= n%10;
+        if (x%2==1){
+            count = count+1;
+        }
+        
+        n= n/10;
+    }
+    printf("%d", count);
+}
+
+// get a number and print the number of two digit odd number in the number
+
+#include <stdio.h>
+
+int n, count=0, x;
+
+int main() {
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    
+    while (n>0){
+        x= n%100;
+        if (x%2==1){
+            count = count+1;
+        }
+        
+        n= n/10;
+    }
+    printf("%d", count);
+}
+
+// get a number and print the number of single digit perfect square
+
+#include <stdio.h>
+
+int n, count=0, x, i;
+
+int main() {
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    
+    while (n>0){
+        x= n%10;
+        for(i=1; i<10; i++){
+            if (i*i==x){
+            count = count+1;
+            }
+        }
+        
+        n= n/10;
+    }
+    printf("%d", count);
+}
+
+// get a number and print the number of 2 digit perfect square number in the number
+
+#include <stdio.h>
+
+int n, count=0, x, i;
+
+int main() {
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    
+    while (n>10){
+        x= n%100;
+        for(i=1; i<100; i++){
+            if (i*i==x){
+            count = count+1;
+            }
+        }
+        
+        n= n/10;
+    }
+    printf("%d", count);
+}
 
 
+// print the largest 4 digit number which is div by both 7 and 9
+
+#include <stdio.h>
+
+int x, i;
+
+int main() {
+    
+    for (i=1000; i< 10000; i++){
+       if (i%7==0 && i%9==0){
+           x=i;
+       }
+    }
+    printf("%d\n", x);
+}
+
+// print the total count of numbers less than 10000 whose sum of digits is 14
+
+#include <stdio.h>
+
+int main() {
+    int i, temp, sum, count = 0;
+
+    for (i = 1; i < 100000; i++) {
+        temp = i;
+        sum = 0;
+
+        while (temp > 0) {
+            sum = sum + (temp % 10);
+            temp = temp / 10;
+        }
+
+        if (sum == 14) {
+            count++;
+        }
+    }
+
+    printf("%d\n", count);
+    return 0;
+}
+
+// LCM of two numbers
+
+#include <stdio.h>
+
+int main() {
+    int a, b, max;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    max = (a > b) ? a : b;
+
+    while (1) {
+        if (max % a == 0 && max % b == 0) {
+            printf("LCM = %d", max);
+            break;
+        }
+        max++;
+    }
+
+    return 0;
+}
+
+
+// print the LCM of 3 numbers
+
+#include <stdio.h>
+
+int main() {
+    int a, b, c, max;
+
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    
+    if (a>b && a>c){
+        max=a;
+    }else if (b>a && b>c){
+        max=b;
+    }else {
+        max=c;
+    }
+
+    while (1) {
+        if (max % a == 0 && max % b == 0 && max % c==0) {
+            printf("LCM = %d", max);
+            break;
+        }
+        max++;
+    }
+}
+
+// print the HCF of 2 numbers
+
+#include <stdio.h>
+
+int main() {
+    int a, b, i, hcf;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    for (i = 1; i <= a && i <= b; i++) {
+        if (a % i == 0 && b % i == 0) {
+            hcf = i;
+        }
+    }
+
+    printf("HCF = %d", hcf);
+}
