@@ -215,3 +215,137 @@ int main(){
     printf("%d", sum);
 }
 
+// interchange first and last digit
+
+#include <stdio.h>
+
+int disp__interchange_first_and_last(int i){
+    int temp, div=1, first, middle, last, number;
+    
+    temp=i;
+    last= i%10;
+    
+    while(temp>=10){
+        temp=temp/10;
+        div=div*10;
+    }
+    
+    first= temp;
+    middle= (i%div)/10;
+    
+    number= (last*div) + (middle*10) +first;
+    return number;
+   
+}
+
+int main(){
+    int n, number;
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    number= disp__interchange_first_and_last(n);
+    printf("%d", number);
+}
+
+// print the number as it is if the last digit is even else subtract 1 from the digit and return the number
+
+#include <stdio.h>
+
+int check_last_digit_odd(int i){
+    int div=1, temp, number, result, last;
+    
+    temp=i;
+    while (temp>=10){
+        temp= temp/10;
+        div=div*10;
+    }
+    last= temp;
+    number= i % div;
+    
+    if (temp%2==1){
+        temp=temp-1;
+        return((temp*div)+ number);
+        
+    }
+    else{
+        return i;
+    }
+   
+}
+
+int main(){
+    int n, number;
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    number= check_last_digit_odd(n);
+    printf("%d", number);
+}
+
+// check prime or not
+
+
+#include <stdio.h>
+
+int check_prime_or_not(int n){
+    int prime=1, i;
+    if (n<=1){
+        return(prime=0);
+    }
+    
+    for (i=2; i< n/2; i++){
+        if (n%i==0){
+            return(prime=0);
+        }
+    }
+    
+    return(prime=1);
+}
+
+int main(){
+    int n, number;
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    number= check_prime_or_not(n);
+    if(number==1){
+        printf("it is a prime number");
+    }else{
+        printf("it is not a prime number");
+    }
+    
+}
+
+// prime and sum of digits is 14 or not, 4 conditions
+
+#include <stdio.h>
+
+int check_prime_or_not(int n){
+    int prime=1, i;
+    if (n<=1){
+        return(prime=0);
+    }
+    
+    for (i=2; i< n/2; i++){
+        if (n%i==0){
+            return(prime=0);
+        }
+    }
+    
+    return(prime=1);
+}
+
+int main(){
+    int n, number;
+    printf("Enter the number: ");
+    scanf("%d", &n);
+    number= check_prime_or_not(n);
+    if((number==1) && (n%10 +n/10 ==14)){
+        printf("prime and sum of digits is 14");
+    }else if((number==0) && (n%10 +n/10 ==14)){
+        printf("Not prime but sum of digits is 14");
+    } else if((number==1) && (n%10 +n/10 !=14)){
+        printf("prime but sum of digits is not equal to 14");
+    }else {
+        printf("Not prime and sum of digits is not equal to 14");
+    }
+}
+
+//
