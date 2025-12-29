@@ -81,7 +81,7 @@ int main(){
     disp_odd();
 }
 
-// print thr odd numbers from 11 to 20
+// print the odd numbers from 11 to 20
 
 #include <stdio.h>
 
@@ -591,3 +591,192 @@ int main(){
     result= disp_biggest_divby7_and_9();
     printf("%d", result);
 }
+
+// print the total count of numbers whose sum of digits is 14 which are less than 10000
+
+#include <stdio.h>
+
+int disp_count_sum14(int n){
+    int sum=0;
+    
+    while (n>0){
+            sum= sum+ (n%10);
+            n= n/10;
+        }
+        if (sum==14){
+          return 1;
+      }
+    return 0;
+}
+
+int main(){
+    int i, count=0;
+    for (i=0; i<10000; i++){
+        if (disp_count_sum14(i)){
+            count=count+1;
+        }
+    }
+    
+    printf("%d", count);
+}
+
+
+// LCM of 2 numbers
+
+#include <stdio.h>
+
+int disp_lcm2(int a, int b){
+    int max;
+    max = (a > b) ? a : b;
+
+    while (1) {
+        if (max % a == 0 && max % b == 0) {
+            break;
+        }
+        max++;
+    }
+    return max;
+}
+
+int main(){
+    int a, b, lcm;
+    printf("Enter the two numbers: ");
+    scanf("%d %d", &a, &b);
+    
+    lcm= disp_lcm2(a,b);
+    printf("The LCM of the 2 numbers is %d", lcm);
+}
+
+// LCM of 3 numbers
+
+#include <stdio.h>
+
+int disp_lcm3(int a, int b, int c){
+    int max;
+     if (a>b && a>c){
+        max=a;
+    }else if (b>a && b>c){
+        max=b;
+    }else {
+        max=c;
+    }
+
+    while (1) {
+        if (max % a == 0 && max % b == 0 && max % c==0) {
+            break;
+        }
+        max++;
+    }
+    return max;
+}
+
+int main(){
+    int a, b, c, lcm;
+    printf("Enter the three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    
+    lcm= disp_lcm3(a,b, c);
+    printf("The LCM of the 3 numbers is %d", lcm);
+}
+
+// HCF of two numbers
+
+#include <stdio.h>
+
+int find_hcf(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int main() {
+    int a, b, hcf;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    hcf = find_hcf(a, b);
+
+    printf("HCF of %d and %d is %d", a, b, hcf);
+
+}
+
+// print sum 1 to 5
+
+#include <stdio.h>
+
+int disp_sum() {
+    int sum=0, i;
+    for(i=1; i<6; i++){
+        sum=sum+i;
+    }
+    return sum;
+}
+
+int main() {
+    int result;
+    result= disp_sum();
+    printf("%d", result);
+}
+
+// print the summ of numbers 6 to 1
+
+#include <stdio.h>
+
+int disp_rsum() {
+    int sum=0, i;
+    for(i=6; i>=0; i--){
+        sum=sum+i;
+    }
+    return sum;
+}
+
+int main() {
+    int result;
+    result= disp_rsum();
+    printf("%d", result);
+}
+
+// print the sum of two-digit numbers whose ones digit is 5
+
+#include <stdio.h>
+
+int disp_2digit_ones5() {
+    int sum=0, i;
+    for(i=10; i<=100; i++){
+        if(i%10==5){
+           sum=sum+i; 
+        }
+    }
+    return sum;
+}
+
+int main() {
+    int result;
+    result= disp_2digit_ones5();
+    printf("%d", result);
+}
+
+// print the sum of 2 digit numbers whose tens digit is 7 and odd number
+
+#include <stdio.h>
+
+int disp_2digit_odd_sum_digit7() {
+    int sum=0, i;
+    for(i=10; i<=100; i++){
+        if((i/10==7) && (i%2==1)){
+           sum=sum+i; 
+        }
+    }
+    return sum;
+}
+
+int main() {
+    int result;
+    result= disp_2digit_odd_sum_digit7();
+    printf("%d", result);
+}
+
