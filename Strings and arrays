@@ -1,0 +1,174 @@
+// get 5 numbers from the user and print the sum of elements
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, sum=0;
+    printf("Enter the 5 numbers ");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+    for (i=0; i<5; i++){
+        sum= sum+ a[i];
+    }
+    printf("%d", sum);
+}
+
+// get 5 numbers and print the average of 5 numbers
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, sum=0, average;
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+    for (i=0; i<5; i++){
+        sum= sum+ a[i];
+        average= sum/5;
+    }
+    printf("%d", average);
+}
+
+// print thr smallest number in the array
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, sum=0, small;
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+    for (i=0; i<5; i++){
+       if (a[i]< a[i+1])
+       small = a[i];
+    }
+    printf("%d", small);
+}
+
+// print the largest number in the array
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, sum=0, small;
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+    for (i=0; i<5; i++){
+       if (a[i]> a[i+1])
+       small = a[i];
+    }
+    printf("%d", small);
+}
+
+// print the numbers in ascending order
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, sum=0, small, j, temp;
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+   for (i = 0; i < 5 - 1; i++) {
+        for (j = i + 1; j < 5; j++) {
+            if (a[i] > a[j]) {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+
+    printf("Numbers in ascending order:\n");
+    for (i = 0; i < 5; i++) {
+        printf("%d ", a[i]);
+    }
+}
+
+// print the numbers in descending order
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, j, temp;
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+   for (i = 0; i < 5 - 1; i++) {
+        for (j = i + 1; j < 5; j++) {
+            if (a[i] < a[j]) {
+                temp = a[j];
+                a[j] = a[i];
+                a[i] = temp;
+            }
+        }
+    }
+
+    printf("Numbers in descending order:\n");
+    for (i = 0; i < 5; i++) {
+        printf("%d ", a[i]);
+    }
+}
+
+// print the array after removing the odd numbers
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, j=0, b[5];
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+   for (i = 0; i < 5 ; i++) {
+       if (a[i]%2==0){
+           b[j]=a[i];
+           j++;
+       }
+    }
+
+    printf("Array after removing odd numbers:\n");
+    for (i = 0; i < j; i++) {
+        printf("%d ", b[i]);
+    }
+}
+
+// print the array after removing the even numbers
+
+#include <stdio.h>
+
+int main(){
+    int a[5], i, j=0, b[5];
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+   for (i = 0; i < 5 ; i++) {
+       if (a[i]%2==1){
+           b[j]=a[i];
+           j++;
+       }
+    }
+
+    printf("Array after removing odd numbers:\n");
+    for (i = 0; i < j; i++) {
+        printf("%d ", b[i]);
+    }
+}
+
+//
