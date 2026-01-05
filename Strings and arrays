@@ -171,4 +171,297 @@ int main(){
     }
 }
 
-//
+// get 5 numbers and remove the prime numbers and store it in the diff array
+
+#include <stdio.h>
+
+int isprime(int n){
+    int prime, i;
+    if (n<=1){
+        return 0;
+    }
+    
+    for (i=2; i<n; i++){
+        if(n%i==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int main(){
+    int a[5], i, j=0, b[5];
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+   for (i = 0; i < 5 ; i++) {
+       if (isprime(a[i])==0){
+           b[j]=a[i];
+           j++;
+       }
+    }
+
+    printf("Array after removing prime numbers:\n");
+    for (i = 0; i < j; i++) {
+        printf("%d ", b[i]);
+    }
+}
+ 
+// Reverse the numbers in the arrays and print the sum of the elements
+
+#include <stdio.h>
+
+int reverse(int n){
+    int rev=0, digit;
+    
+    while (n>0){
+        digit= n%10;
+        rev= 10* rev +digit;
+        n= n/10;
+    }
+    return rev;
+    
+}
+
+int main(){
+    int a[5], i, b[5], sum=0;
+    printf("Enter the 5 numbers: \n");
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &a[i]);  
+    }
+
+   for (i = 0; i < 5 ; i++) {
+       b[i]= reverse(a[i]);
+       sum= sum+b[i];
+    }
+
+    printf("Array after reversing the numbers:\n");
+    for (i = 0; i < 5; i++) {
+        printf("%d ", b[i]);
+    }
+    printf("\nThe sum of the reversed array elements: %d", sum);
+}
+
+// get multiple numbers from the user and stop when the number is 0 and print the count an dsum of elements in the array
+
+#include <stdio.h>
+
+int main(){
+    int a[100], i, count=0, sum=0;
+    printf("Enter the numbers: \n");
+    for (i = 0; i < 100; i++) {
+        scanf("%d", &a[i]); 
+        
+        if (a[i]==0){
+            break;
+        }
+        count= count+1;
+        sum= sum+a[i];
+    }
+    
+    printf("\nThe count of the array elemts: %d", count);
+    printf("\nThe sum of the array elemts: %d", sum);
+}
+
+// get multiple numbers, stop if the number is 0. and if 4 numbers are entered, check if first and last numbers are equal. then print success, else failure
+
+#include <stdio.h>
+
+int main() {
+    int a[10];   
+    int i = 0;
+
+    printf("Enter numbers (enter 0 to stop):\n");
+
+    while (1) {
+        scanf("%d", &a[i]);
+        if (a[i] == 0) {
+            break;          
+        }
+        i++;              
+    }
+
+    if (i == 4) {
+        if (a[0] == a[i - 1]) {
+            printf("Success");
+        } else {
+            printf("Failure");
+        }
+    } else {
+        printf("Failure");
+    }
+
+}
+
+// get multiple numbers and 0 to stop. if the count is odd, print the middle number else print the avg of the middle two numbers
+
+#include <stdio.h>
+
+int main() {
+    int a[20];
+    int i = 0;
+    float avg;
+
+    printf("Enter numbers:\n");
+
+    while (1) {
+        scanf("%d", &a[i]);
+        if (a[i] == 0)
+            break;
+        i++;
+    }
+
+    if (i == 0) {
+        printf("No elements entered");
+    }
+    else if (i % 2 == 1) {
+        printf("Middle number: %d", a[i / 2]);
+    }
+    else {
+        avg = (a[(i / 2) - 1] + a[i / 2]) / 2.0;
+        printf("Average of middle two numbers: %.2f", avg);
+    }
+
+}
+
+// get the numbers, zero to stop. add each elements sum and put it in separate array and print the arrayin ascending order
+
+#include <stdio.h>
+
+int sum(int n){
+    int sum=0, digit;
+    while (n>0){
+        digit= n%10;
+        sum=sum+digit;
+        n=n/10;
+    }
+    return sum;
+}
+
+
+int main() {
+    int a[20], b[20];
+    int i = 0, j, k, temp;
+    float avg;
+
+    printf("Enter the numbers (zero to stop the array):\n");
+
+    while (1) {
+        scanf("%d", &a[i]);
+        if (a[i] == 0)
+            break;
+        i++;
+    }
+
+   for (j=0; j< i; j++){
+       b[j]= sum(a[j]);
+   }
+   
+   printf("The array of sum of the digits of the number: ");
+   for (j=0; j<i; j++){
+       printf("%d ", b[j]);
+   }
+   
+   for (j=0; j<i-1; j++){
+       for (k=j+1; k< i; k++){
+           if(b[j]> b[k]){
+               temp= b[j];
+               b[j]= b[k];
+               b[k]= temp;
+           }
+       }
+   }
+   
+   printf ("\nThe elements after sorting the sum of digits array: ");
+   for (j=0; j<i; j++){
+       printf("%d ", b[j]);
+   }
+}
+
+// sum of two integer arrays of numbers upto 50 digits and store it in 51 digit array
+
+#include <stdio.h>
+
+int main() {
+    int a[50], b[50], sum[51];
+    int n1, n2;
+    int i, carry = 0;
+
+    printf("Enter number of digits of first number: ");
+    scanf("%d", &n1);
+
+    printf("Enter digits of first number:\n");
+    for (i = 0; i < n1; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    printf("Enter number of digits of second number: ");
+    scanf("%d", &n2);
+
+    printf("Enter digits of second number:\n");
+    for (i = 0; i < n2; i++) {
+        scanf("%d", &b[i]);
+    }
+
+    int k = 0;
+    int i1 = n1 - 1;
+    int i2 = n2 - 1;
+
+    while (i1 >= 0 || i2 >= 0) {
+        int digit1 = (i1 >= 0) ? a[i1] : 0;
+        int digit2 = (i2 >= 0) ? b[i2] : 0;
+
+        int total = digit1 + digit2 + carry;
+        sum[k] = total % 10;
+        carry = total / 10;
+
+        i1--;
+        i2--;
+        k++;
+    }
+
+    if (carry > 0) {
+        sum[k++] = carry;
+    }
+
+    printf("Sum = ");
+    for (i = k - 1; i >= 0; i--) {
+        printf("%d", sum[i]);
+    }
+
+    return 0;
+}
+
+// adjust the carry of the numbers
+
+#include <stdio.h>
+
+int a[10], i, n, x;
+
+int main(){
+    
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    printf("Enter the numbers: ");
+    for (i=0; i<n; i++){
+        scanf("%d", &a[i]);
+    }
+    
+    for (i=0; i< n-1; i++){
+        if (a[i]>=10){
+            x= a[i]/10;
+            a[i]=a[i]%10;
+            a[i+1]= x+a[i+1];
+        }
+    }
+    
+    printf("The array after adjusting the carry: ");
+    for (i=0; i<n; i++){
+        printf("%d ", a[i]);
+    }
+}
+
+
