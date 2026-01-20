@@ -200,4 +200,124 @@ int main() {
     }
 }
 
-//
+// Get a string of 50 digirs and remove the leading zeroes
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+   char str[100];
+   int i=0;
+   
+   printf("Enter the string: ");
+   fgets(str, sizeof(str), stdin);
+   
+   while(str[i]=='0'){
+       i++;
+   }
+   
+   if (i== strlen(str)){
+       printf("Result: 0\n");
+   } else{
+       printf("Result: %s", &str[i]);
+   }
+
+}
+
+// Get 50 digits and reverse the number
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+   char str[100];
+   int i=0, len;
+   char temp;
+   
+   printf("Enter the string: ");
+   fgets(str, sizeof(str), stdin);
+   
+   len= strlen(str);
+   
+   for (i=0; i<len/2; i++){
+       temp= str[i];
+       str[i]= str[len-i-1];
+       str[len-i-1]= temp;
+   }
+   
+   printf("Reversed Number: %s", str);
+}
+
+// covt string into array
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+   char str[100];
+   int i=0, len;
+   int digits[100];
+   
+   printf("Enter the string: ");
+   fgets(str, sizeof(str), stdin);
+   str[strcspn(str, "\n")] = '\0';
+
+   
+   len= strlen(str);
+   
+   for(i=0; i<len; i++){
+       if(str[i]>= '0' && str[i]<= '9'){
+       digits[i]= str[i]- '0';
+       }
+       else{
+       printf("Invalid Input number\n");
+       return 1;
+       }
+   }
+   
+   printf("String to array\n");
+   for(i=0; i<len; i++){
+       printf("%d", digits[i]);
+   }
+   return 0;
+}
+
+// string to array
+
+#include <stdio.h>
+
+int main() {
+    int digits[50];
+    char str[51];   
+    int n, i;
+
+    printf("Enter number of digits (max 50): ");
+    scanf("%d", &n);
+
+    if (n > 50) {
+        printf("Maximum 50 digits allowed\n");
+        return 1;
+    }
+
+    printf("Enter %d digits:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &digits[i]);
+
+        if (digits[i] < 0 || digits[i] > 9) {
+            printf("Invalid digit\n");
+            return 1;
+        }
+    }
+
+   
+    for (i = 0; i < n; i++) {
+        str[i] = digits[i] + '0';
+    }
+
+    str[n] = '\0';   
+
+    printf("Answer: %s\n", str);
+
+    return 0;
+}
+
