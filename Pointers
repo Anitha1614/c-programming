@@ -106,4 +106,224 @@ int main() {
     return 0;
 }
 
-//
+// copy integers from one location to another
+
+#include <stdio.h>
+
+void memcopy(int *src, int *dst, int size){
+    int i;
+    for (i=0; i< size; i++){
+        *(dst + i)= *(src + i);
+    }
+}
+
+int main(){
+    int i, n;
+    printf("Enter the number of elements ");
+    scanf("%d", &n);
+    
+    int src[n], dst[n];
+    
+    printf("Enter the source array elements\n");
+    for(i=0; i<n; i++){
+        scanf("%d", (src+i));
+    }
+    
+    memcopy (src, dst, n);
+    
+    printf("Destination array after copying\n");
+    for(i=0; i<n; i++){
+        printf ("%d ", *(dst +i));
+    }
+}
+
+// copy srting to another
+
+#include <stdio.h>
+
+void strcopy(char *src, char *dst) {
+    while (*src != '\0') {
+        *dst = *src;   
+        src++;        
+        dst++;         
+    }
+    *dst = '\0';       
+}
+
+int main() {
+    char src[100], dst[100];
+
+    printf("Enter a string: ");
+    scanf("%s", src);   
+
+    strcopy(src, dst);
+
+    printf("Copied string: %s\n", dst);
+
+    return 0;
+}
+
+// compare set of intergers and print success or failure
+
+#include <stdio.h>
+
+int memcomp(int *src, int *dst, int size) {
+    int i;
+
+    for (i = 0; i < size; i++) {
+        if (*(src + i) != *(dst + i)) {
+            return 0;   
+        }
+    }
+    return 1;          
+}
+
+int main() {
+    int n, i;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int src[n], dst[n];
+
+    printf("Enter source array elements:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", (src + i));
+    }
+
+    printf("Enter destination array elements:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", (dst + i));
+    }
+
+    if (memcomp(src, dst, n))
+        printf("Success\n");
+    else
+        printf("Failure\n");
+
+    return 0;
+}
+
+// compare two strings and print success or failure
+
+#include <stdio.h>
+
+int strcomp(char *src, char *dst) {
+    while (*src != '\0' && *dst != '\0') {
+        if (*src != *dst) {
+            return 0;   
+        }
+        src++;
+        dst++;
+    }
+
+    if (*src == '\0' && *dst == '\0')
+        return 1;      
+    else
+        return 0;       
+}
+
+int main() {
+    char src[100], dst[100];
+
+    printf("Enter first string: ");
+    scanf("%s", src);
+
+    printf("Enter second string: ");
+    scanf("%s", dst);
+
+    if (strcomp(src, dst))
+        printf("Success\n");
+    else
+        printf("Failure\n");
+
+    return 0;
+}
+
+// concatenate two integer arrays into single array
+
+#include <stdio.h>
+
+void intcon(int *src1, int size1, int *src2, int size2, int *dst) {
+    int i;
+
+    for (i = 0; i < size1; i++) {
+        *(dst + i) = *(src1 + i);
+    }
+
+    for (i = 0; i < size2; i++) {
+        *(dst + size1 + i) = *(src2 + i);
+    }
+}
+
+int main() {
+    int n1, n2, i;
+
+    printf("Enter size of first array: ");
+    scanf("%d", &n1);
+
+    int src1[n1];
+
+    printf("Enter elements of first array:\n");
+    for (i = 0; i < n1; i++) {
+        scanf("%d", (src1 + i));
+    }
+
+    printf("Enter size of second array: ");
+    scanf("%d", &n2);
+
+    int src2[n2];
+
+    printf("Enter elements of second array:\n");
+    for (i = 0; i < n2; i++) {
+        scanf("%d", (src2 + i));
+    }
+
+    int dst[n1 + n2];   
+
+    intcon(src1, n1, src2, n2, dst);
+
+    printf("Concatenated array:\n");
+    for (i = 0; i < n1 + n2; i++) {
+        printf("%d ", *(dst + i));
+    }
+
+    return 0;
+}
+
+// concatenate two strings into one
+
+#include <stdio.h>
+
+void strcon(char *src1, char *src2, char *dst) {
+
+    while (*src1 != '\0') {
+        *dst = *src1;
+        src1++;
+        dst++;
+    }
+
+    while (*src2 != '\0') {
+        *dst = *src2;
+        src2++;
+        dst++;
+    }
+
+    *dst = '\0';
+}
+
+int main() {
+    char src1[100], src2[100], dst[200];
+
+    printf("Enter first string: ");
+    scanf("%s", src1);
+
+    printf("Enter second string: ");
+    scanf("%s", src2);
+
+    strcon(src1, src2, dst);
+
+    printf("Concatenated string: %s\n", dst);
+
+    return 0;
+}
