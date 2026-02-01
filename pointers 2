@@ -1,0 +1,69 @@
+// Take two 50 numbers and perform addition and print the result
+
+#include <stdio.h>
+#include <string.h>
+
+void getnumbers(char *n1, char *n2)
+{
+    printf("Enter first number: ");
+    scanf("%s", n1);
+
+    printf("Enter second number: ");
+    scanf("%s", n2);
+}
+
+void addnumbers(char *n1, char *n2, char *res)
+{
+    char *p1 = n1 + strlen(n1) - 1;
+    char *p2 = n2 + strlen(n2) - 1;
+    char *p3 = res;
+
+    int carry = 0;
+
+    while (p1 >= n1 || p2 >= n2 || carry)
+    {
+        int sum = carry;
+
+        if (p1 >= n1)
+            sum += (*p1-- - '0');
+
+        if (p2 >= n2)
+            sum += (*p2-- - '0');
+
+        *p3++ = (sum % 10) + '0';
+        carry = sum / 10;
+    }
+
+    *p3 = '\0';
+
+    char *start = res;
+    char *end = p3 - 1;
+
+    while (start < end)
+    {
+        char temp = *start;
+        *start = *end;
+        *end = temp;
+        start++;
+        end--;
+    }
+}
+
+void print(char *res)
+{
+    printf("Sum = %s\n", res);
+}
+
+int main()
+{
+    char number1[51], number2[51], result[52];
+
+    getnumbers(number1, number2);
+    addnumbers(number1, number2, result);
+    print(result);
+
+    return 0;
+}
+
+
+// 
