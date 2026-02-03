@@ -182,4 +182,279 @@ int main()
     return 0;
 }
 
-// 
+// multiply string of 50 numbers
+
+#include <stdio.h>
+#include <string.h>
+
+void getnumbers(char *n1, char *n2)
+{
+    printf("Enter first number: ");
+    scanf("%s", n1);
+
+    printf("Enter second number: ");
+    scanf("%s", n2);
+}
+
+void multiplynumbers(char *n1, char *n2, char *res)
+{
+    int len1 = strlen(n1);
+    int len2 = strlen(n2);
+
+    // Initialize result with '0'
+    for (int i = 0; i < len1 + len2; i++)
+        *(res + i) = '0';
+
+    *(res + len1 + len2) = '\0';
+
+    char *p1 = n1 + len1 - 1;
+
+    for (int i = len1 - 1; i >= 0; i--, p1--)
+    {
+        int carry = 0;
+        char *p2 = n2 + len2 - 1;
+        char *pRes = res + i + len2;
+
+        for (int j = len2 - 1; j >= 0; j--, p2--, pRes--)
+        {
+            int mul = (*p1 - '0') * (*p2 - '0')
+                      + (*pRes - '0') + carry;
+
+            *pRes = (mul % 10) + '0';
+            carry = mul / 10;
+        }
+        *pRes += carry;
+    }
+
+    // Remove leading zeros
+    while (*res == '0' && *(res + 1) != '\0')
+        res++;
+}
+
+void print(char *res)
+{
+    printf("Product = %s\n", res);
+}
+
+int main()
+{
+    char number1[51], number2[51], result[101];
+
+    getnumbers(number1, number2);
+    multiplynumbers(number1, number2, result);
+    print(result);
+
+    return 0;
+}
+
+
+// calculator
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX 105
+
+/* ---------- Utility Functions ---------- */
+
+int isValidNumber(char *s)
+{
+    if (*s == '\0') return 0;
+    while (*s)
+    {
+        if (!isdigit(*s)) return 0;
+        s++;
+    }
+    return 1;
+}
+
+void removeLeadingZeros(char *s)
+{
+    while (*s == '0' && *(s + 1))
+        memmove(s, s + 1, strlen(s));
+}
+
+/* ---------- ADDITION ---------- */
+
+void add(char *a, char *b, char *res)
+{
+    int i = strlen(a) - 1, j = strlen(b) - 1, k = 0, carry = 0;
+    char temp[MAX];
+
+    while (i >= 0 || j >= 0 || carry)
+    {
+        int sum = carry;
+        if (i >= 0) sum += a[i--] - '0';
+        if (j >= 0) sum += b[j--] - '0';
+
+        temp[k++] = (sum % 10) + '0';
+        carry = sum / 10;
+    }
+
+    temp[k] = '\0';
+
+    // reverse
+    for (i = 0; i < k; i++)
+        res[i] = temp[k - i - 1];
+    res[k] = '\0';
+}
+
+/* ---------- SUBTRACTION (a >= b assumed) ---------- */
+
+void subtract(char *a, char *b, char *res)
+{
+    int i = strlen(a) - 1, j = strlen(b) - 1, k = 0, borrow = 0;
+    char temp[MAX];
+
+    while (i >= 0)
+    {
+        int diff = (a[i] - '0') - borrow;
+        if (j >= 0) diff -= (b[j--] - '0');
+
+        if (diff < 0)
+        {
+            diff += 10;
+            borrow = 1;
+        }
+        else borrow = 0;
+
+        temp[k++] = diff + '0';
+        i--;
+    }
+
+    temp[k] = '\0';
+
+    // reverse
+    for (i = 0; i < k; i++)
+        res[i] = temp[k - i - 1];
+    res[k] = '\0';
+
+    removeLeadingZeros(res);
+}
+
+/* ---------- MULTIPLICATION ---------- */
+
+void multiply(char *a, char *b, char *res)
+{
+    int la = strlen(a), lb = strlen(b);
+    int temp[MAX] = {0};
+
+    for (int i = la - 1; i >= 0; i--)
+        for (int j = lb - 1; j >= 0; j--)
+            temp[i + j + 1] += (a[i] - '0') * (b[j] - '0');
+
+    for (int i = la + lb - 1; i > 0; i--)
+    {
+        temp[i - 1] += temp[i] / 10;
+        temp[i] %= 10;
+    }
+
+    int k = 0, i = 0;
+    while (i < la + lb && temp[i] == 0) i++;
+
+    if (i == la + lb)
+        res[k++] = '0';
+    else
+        while (i < la + lb)
+            res[k++] = temp[i++] + '0';
+
+    res[k] = '\0';
+}
+
+/* ---------- DIVISION ---------- */
+
+void divide(char *a, char *b, char *q, char *r)
+{
+    char curr[MAX] = "0";
+    char temp[MAX];
+    int qi = 0;
+
+    for (int i = 0; a[i]; i++)
+    {
+        int len = strlen(curr);
+        curr[len] = a[i];
+        curr[len + 1] = '\0';
+        removeLeadingZeros(curr);
+
+        int count = 0;
+        while (strlen(curr) > strlen(b) ||
+              (strlen(curr) == strlen(b) && strcmp(curr, b) >= 0))
+        {
+            subtract(curr, b, temp);
+            strcpy(curr, temp);
+            count++;
+        }
+        q[qi++] = count + '0';
+    }
+
+    q[qi] = '\0';
+    removeLeadingZeros(q);
+    strcpy(r, curr);
+}
+
+/* ---------- MAIN CALCULATOR ---------- */
+
+int main()
+{
+    char input[300];
+
+    while (1)
+    {
+        printf("Calc> ");
+        fgets(input, sizeof(input), stdin);
+        input[strcspn(input, "\n")] = '\0';
+
+        if (strcmp(input, "Exit") == 0)
+            break;
+
+        char a[MAX], b[MAX], op;
+        if (sscanf(input, "%50[0-9]%c%50[0-9]", a, &op, b) != 3 ||
+            !isValidNumber(a) || !isValidNumber(b))
+        {
+            printf("Invalid input\n");
+            continue;
+        }
+
+        char res[MAX], rem[MAX];
+
+        switch (op)
+        {
+        case '+':
+            add(a, b, res);
+            printf("%s\n", res);
+            break;
+
+        case '-':
+            if (strlen(a) < strlen(b) || (strlen(a) == strlen(b) && strcmp(a, b) < 0))
+                printf("Negative result not allowed\n");
+            else
+            {
+                subtract(a, b, res);
+                printf("%s\n", res);
+            }
+            break;
+
+        case '*':
+            multiply(a, b, res);
+            printf("%s\n", res);
+            break;
+
+        case '/':
+            if (strcmp(b, "0") == 0)
+                printf("Division by zero\n");
+            else
+            {
+                divide(a, b, res, rem);
+                printf("Quotient = %s\nRemainder = %s\n", res, rem);
+            }
+            break;
+
+        default:
+            printf("Invalid operator\n");
+        }
+    }
+
+    return 0;
+}
+
