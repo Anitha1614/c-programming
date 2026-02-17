@@ -1,0 +1,757 @@
+// Student structure
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure definition
+struct student {
+    int id;
+    int Maths;
+    int Science;
+    struct student *next;
+};
+
+int main() {
+    struct student *head = NULL, *temp = NULL, *newnode = NULL;
+    int id_input;
+
+    while (1) {
+        printf("Enter ID (-1 to stop): ");
+        scanf("%d", &id_input);
+
+        if (id_input == -1)
+            break;
+
+        // Allocate memory
+        newnode = (struct student*)malloc(sizeof(struct student));
+
+        newnode->id = id_input;
+
+        printf("Enter Maths mark: ");
+        scanf("%d", &newnode->Maths);
+
+        printf("Enter Science mark: ");
+        scanf("%d", &newnode->Science);
+
+        newnode->next = NULL;
+
+        // If first node
+        if (head == NULL) {
+            head = newnode;
+            temp = newnode;
+        } else {
+            temp->next = newnode;
+            temp = newnode;
+        }
+    }
+
+    // Display all entries
+    printf("\nStudent Records:\n");
+    temp = head;
+    while (temp != NULL) {
+        printf("ID: %d | Maths: %d | Science: %d\n",
+               temp->id, temp->Maths, temp->Science);
+        temp = temp->next;
+    }
+
+    return 0;
+}
+
+
+// insert and display
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student {
+    int id;
+    int Maths;
+    int Science;
+    struct student *next;
+};
+
+// Function to create sample list
+struct student* createSampleList() {
+    struct student *head = NULL, *temp = NULL, *newnode = NULL;
+
+    for (int i = 1; i <= 5; i++) {
+        newnode = (struct student*)malloc(sizeof(struct student));
+        newnode->id = i;
+        newnode->Maths = 50 + i;
+        newnode->Science = 60 + i;
+        newnode->next = NULL;
+
+        if (head == NULL) {
+            head = newnode;
+            temp = newnode;
+        } else {
+            temp->next = newnode;
+            temp = newnode;
+        }
+    }
+    return head;
+}
+
+// Display function
+void display(struct student *head) {
+    struct student *temp = head;
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    while (temp != NULL) {
+        printf("ID: %d | Maths: %d | Science: %d\n",
+               temp->id, temp->Maths, temp->Science);
+        temp = temp->next;
+    }
+}
+
+// Insert before or after given ID
+struct student* insertEntry(struct student *head) {
+    int target_id, choice;
+    struct student *newnode, *temp = head, *prev = NULL;
+
+    printf("Enter ID to insert before/after: ");
+    scanf("%d", &target_id);
+
+    printf("1. Insert Before\n2. Insert After\nChoose option: ");
+    scanf("%d", &choice);
+
+    newnode = (struct student*)malloc(sizeof(struct student));
+    printf("Enter new ID: ");
+    scanf("%d", &newnode->id);
+    printf("Enter Maths mark: ");
+    scanf("%d", &newnode->Maths);
+    printf("Enter Science mark: ");
+    scanf("%d", &newnode->Science);
+    newnode->next = NULL;
+
+    // Insert before
+    if (choice == 1) {
+        if (head->id == target_id) {
+            newnode->next = head;
+            head = newnode;
+            return head;
+        }
+
+        while (temp != NULL && temp->id != target_id) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if (temp == NULL) {
+            printf("ID not found!\n");
+        } else {
+            prev->next = newnode;
+            newnode->next = temp;
+        }
+    }
+    // Insert after
+    else if (choice == 2) {
+        while (temp != NULL && temp->id != target_id) {
+            temp = temp->next;
+        }
+
+        if (temp == NULL) {
+            printf("ID not found!\n");
+        } else {
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+    }
+
+    return head;
+}
+
+int main() {
+    struct student *head = createSampleList();
+    int menu;
+
+    while (1) {
+        printf("\n--- MENU ---\n");
+        printf("1. Insert Entry\n");
+        printf("2. Display List\n");
+        printf("3. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                head = insertEntry(head);
+                break;
+            case 2:
+                display(head);
+                break;
+            case 3:
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
+
+// detele, insert, display and exit (sample linked list)
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student {
+    int id;
+    int Maths;
+    int Science;
+    struct student *next;
+};
+
+// Create sample list (5 nodes)
+struct student* createSampleList() {
+    struct student *head = NULL, *temp = NULL, *newnode;
+
+    for (int i = 1; i <= 5; i++) {
+        newnode = (struct student*)malloc(sizeof(struct student));
+        newnode->id = i;
+        newnode->Maths = 50 + i;
+        newnode->Science = 60 + i;
+        newnode->next = NULL;
+
+        if (head == NULL) {
+            head = newnode;
+            temp = newnode;
+        } else {
+            temp->next = newnode;
+            temp = newnode;
+        }
+    }
+    return head;
+}
+
+// Display function
+void display(struct student *head) {
+    struct student *temp = head;
+
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    while (temp != NULL) {
+        printf("ID: %d | Maths: %d | Science: %d\n",
+               temp->id, temp->Maths, temp->Science);
+        temp = temp->next;
+    }
+}
+
+// Insert before or after
+struct student* insertEntry(struct student *head) {
+    int target_id, choice;
+    struct student *newnode, *temp = head, *prev = NULL;
+
+    printf("Enter ID to insert before/after: ");
+    scanf("%d", &target_id);
+
+    printf("1. Insert Before\n2. Insert After\nChoose option: ");
+    scanf("%d", &choice);
+
+    newnode = (struct student*)malloc(sizeof(struct student));
+    printf("Enter new ID: ");
+    scanf("%d", &newnode->id);
+    printf("Enter Maths mark: ");
+    scanf("%d", &newnode->Maths);
+    printf("Enter Science mark: ");
+    scanf("%d", &newnode->Science);
+    newnode->next = NULL;
+
+    // Insert Before
+    if (choice == 1) {
+        if (head->id == target_id) {
+            newnode->next = head;
+            return newnode;
+        }
+
+        while (temp != NULL && temp->id != target_id) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if (temp == NULL) {
+            printf("ID not found!\n");
+            free(newnode);
+        } else {
+            prev->next = newnode;
+            newnode->next = temp;
+        }
+    }
+
+    // Insert After
+    else if (choice == 2) {
+        while (temp != NULL && temp->id != target_id) {
+            temp = temp->next;
+        }
+
+        if (temp == NULL) {
+            printf("ID not found!\n");
+            free(newnode);
+        } else {
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+    }
+
+    return head;
+}
+
+// Delete given ID
+struct student* deleteEntry(struct student *head) {
+    int target_id;
+    struct student *temp = head, *prev = NULL;
+
+    printf("Enter ID to delete: ");
+    scanf("%d", &target_id);
+
+    // If head node
+    if (head != NULL && head->id == target_id) {
+        head = head->next;
+        free(temp);
+        printf("Deleted successfully\n");
+        return head;
+    }
+
+    while (temp != NULL && temp->id != target_id) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("ID not found!\n");
+    } else {
+        prev->next = temp->next;
+        free(temp);
+        printf("Deleted successfully\n");
+    }
+
+    return head;
+}
+
+int main() {
+    struct student *head = createSampleList();
+    int menu;
+
+    while (1) {
+        printf("\n--- MENU ---\n");
+        printf("1. Insert Entry\n");
+        printf("2. Delete Entry\n");
+        printf("3. Display List\n");
+        printf("4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                head = insertEntry(head);
+                break;
+            case 2:
+                head = deleteEntry(head);
+                break;
+            case 3:
+                display(head);
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
+
+
+// doubly linked list
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student {
+    int id;
+    int Maths;
+    int Science;
+    struct student *next;
+};
+
+// Create sample list (5 nodes)
+struct student* createSampleList() {
+    struct student *head = NULL, *temp = NULL, *newnode;
+
+    for (int i = 1; i <= 5; i++) {
+        newnode = (struct student*)malloc(sizeof(struct student));
+        newnode->id = i;
+        newnode->Maths = 50 + i;
+        newnode->Science = 60 + i;
+        newnode->next = NULL;
+
+        if (head == NULL) {
+            head = newnode;
+            temp = newnode;
+        } else {
+            temp->next = newnode;
+            temp = newnode;
+        }
+    }
+    return head;
+}
+
+// Display function
+void display(struct student *head) {
+    struct student *temp = head;
+
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    while (temp != NULL) {
+        printf("ID: %d | Maths: %d | Science: %d\n",
+               temp->id, temp->Maths, temp->Science);
+        temp = temp->next;
+    }
+}
+
+// Insert before or after
+struct student* insertEntry(struct student *head) {
+    int target_id, choice;
+    struct student *newnode, *temp = head, *prev = NULL;
+
+    printf("Enter ID to insert before/after: ");
+    scanf("%d", &target_id);
+
+    printf("1. Insert Before\n2. Insert After\nChoose option: ");
+    scanf("%d", &choice);
+
+    newnode = (struct student*)malloc(sizeof(struct student));
+    printf("Enter new ID: ");
+    scanf("%d", &newnode->id);
+    printf("Enter Maths mark: ");
+    scanf("%d", &newnode->Maths);
+    printf("Enter Science mark: ");
+    scanf("%d", &newnode->Science);
+    newnode->next = NULL;
+
+    // Insert Before
+    if (choice == 1) {
+        if (head->id == target_id) {
+            newnode->next = head;
+            return newnode;
+        }
+
+        while (temp != NULL && temp->id != target_id) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if (temp == NULL) {
+            printf("ID not found!\n");
+            free(newnode);
+        } else {
+            prev->next = newnode;
+            newnode->next = temp;
+        }
+    }
+
+    // Insert After
+    else if (choice == 2) {
+        while (temp != NULL && temp->id != target_id) {
+            temp = temp->next;
+        }
+
+        if (temp == NULL) {
+            printf("ID not found!\n");
+            free(newnode);
+        } else {
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+    }
+
+    return head;
+}
+
+// Delete given ID
+struct student* deleteEntry(struct student *head) {
+    int target_id;
+    struct student *temp = head, *prev = NULL;
+
+    printf("Enter ID to delete: ");
+    scanf("%d", &target_id);
+
+    // If head node
+    if (head != NULL && head->id == target_id) {
+        head = head->next;
+        free(temp);
+        printf("Deleted successfully\n");
+        return head;
+    }
+
+    while (temp != NULL && temp->id != target_id) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("ID not found!\n");
+    } else {
+        prev->next = temp->next;
+        free(temp);
+        printf("Deleted successfully\n");
+    }
+
+    return head;
+}
+
+int main() {
+    struct student *head = createSampleList();
+    int menu;
+
+    while (1) {
+        printf("\n--- MENU ---\n");
+        printf("1. Insert Entry\n");
+        printf("2. Delete Entry\n");
+        printf("3. Display List\n");
+        printf("4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                head = insertEntry(head);
+                break;
+            case 2:
+                head = deleteEntry(head);
+                break;
+            case 3:
+                display(head);
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
+
+
+// push and pop
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student {
+    int id;
+    int Maths;
+    int Science;
+    struct student *next;
+};
+
+struct student *top = NULL;   // Top of stack
+
+// Push operation
+void push() {
+    struct student *newnode;
+
+    newnode = (struct student*)malloc(sizeof(struct student));
+
+    printf("Enter ID: ");
+    scanf("%d", &newnode->id);
+    printf("Enter Maths mark: ");
+    scanf("%d", &newnode->Maths);
+    printf("Enter Science mark: ");
+    scanf("%d", &newnode->Science);
+
+    newnode->next = top;   // Insert at top
+    top = newnode;
+
+    printf("Pushed successfully\n");
+}
+
+// Pop operation
+void pop() {
+    struct student *temp;
+
+    if (top == NULL) {
+        printf("Stack Underflow! (Empty Stack)\n");
+        return;
+    }
+
+    temp = top;
+    printf("Popped Entry:\n");
+    printf("ID: %d | Maths: %d | Science: %d\n",
+           temp->id, temp->Maths, temp->Science);
+
+    top = top->next;
+    free(temp);
+}
+
+// Display stack (Top to Bottom)
+void display() {
+    struct student *temp = top;
+
+    if (top == NULL) {
+        printf("Stack is empty\n");
+        return;
+    }
+
+    printf("Stack (Top to Bottom):\n");
+    while (temp != NULL) {
+        printf("ID: %d | Maths: %d | Science: %d\n",
+               temp->id, temp->Maths, temp->Science);
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n--- MENU ---\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Display Stack\n");
+        printf("4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                push();
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
+
+
+//queue
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student {
+    int id;
+    int Maths;
+    int Science;
+    struct student *next;
+};
+
+struct student *front = NULL;  // Bottom (Remove here)
+struct student *rear = NULL;   // Top (Add here)
+
+// Add (Insert at rear)
+void add() {
+    struct student *newnode;
+    newnode = (struct student*)malloc(sizeof(struct student));
+
+    printf("Enter ID: ");
+    scanf("%d", &newnode->id);
+    printf("Enter Maths mark: ");
+    scanf("%d", &newnode->Maths);
+    printf("Enter Science mark: ");
+    scanf("%d", &newnode->Science);
+
+    newnode->next = NULL;
+
+    if (rear == NULL) {  // First element
+        front = rear = newnode;
+    } else {
+        rear->next = newnode;
+        rear = newnode;
+    }
+
+    printf("Added successfully\n");
+}
+
+// Remove (Delete from front)
+void removeEntry() {
+    struct student *temp;
+
+    if (front == NULL) {
+        printf("Queue Underflow! (Empty Queue)\n");
+        return;
+    }
+
+    temp = front;
+
+    printf("Removed Entry:\n");
+    printf("ID: %d | Maths: %d | Science: %d\n",
+           temp->id, temp->Maths, temp->Science);
+
+    front = front->next;
+
+    if (front == NULL)  // If queue becomes empty
+        rear = NULL;
+
+    free(temp);
+}
+
+// Display from top to bottom
+void display() {
+    struct student *temp = front;
+
+    if (front == NULL) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    printf("Queue (Top to Bottom):\n");
+    while (temp != NULL) {
+        printf("ID: %d | Maths: %d | Science: %d\n",
+               temp->id, temp->Maths, temp->Science);
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n--- MENU ---\n");
+        printf("1. Add\n");
+        printf("2. Remove\n");
+        printf("3. Display Stack\n");
+        printf("4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add();
+                break;
+            case 2:
+                removeEntry();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
+
